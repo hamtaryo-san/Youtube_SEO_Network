@@ -1,0 +1,12 @@
+community{ rate }
+word { rate, name}
+networks { component, sort,,,}
+
+proceedの中
+・printでjsonの文字列を返した方がいい
+・pythonを動かした直後にuserとかsortとか保存しておく
+    ・その次にcommunityを保存
+    ・network_idはその時点でとれてるはずなので、一緒に保存する
+    ・wordは同じ要領でfor文で保存してという感じで行けばよさそう
+    ・二重のfor文で回して保存
+    ・親から保存する

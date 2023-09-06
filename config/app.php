@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
+    
+    /*
+    youtube api keyについての設定
+    */
+    
+    'youtube_api_key' => env('YOUTUBE_API_KEY','NONE'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,7 +75,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tokyo',
 
     /*
     |--------------------------------------------------------------------------
