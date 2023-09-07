@@ -26,7 +26,9 @@ class Network extends Model
     
     public function getByLimit(int $limit_count = 6)
     {
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+            return $this->where('user_id', auth()->user()->id)
+                ->orderBy('updated_at', 'DESC')
+                ->paginate($limit_count);
     }
     
 }

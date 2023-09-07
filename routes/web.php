@@ -15,16 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [NetworkController::class, 'index']);
+    Route::get('/', [NetworkController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [NetworkController::class, 'index']);
     Route::get('/networks/create', [NetworkController::class, 'create']);
     Route::post('/networks/create', [NetworkController::class, 'proceed']);
     Route::get('/networks/{network}', [NetworkController::class ,'show']);

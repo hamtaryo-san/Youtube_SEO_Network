@@ -13,8 +13,6 @@ class NetworkController extends Controller
 {
     public function index(Network $network)
     {
-        $user = auth()->user();
-        $networks = $user->networks;
         return view('networks.index')->with(['networks' => $network->getByLimit()]);
     }
     

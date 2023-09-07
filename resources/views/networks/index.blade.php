@@ -9,6 +9,7 @@
         <style>
             .button{
                 display: flex;
+                position: relative;
                 width: 10vw;
                 height: 4vw;
                 background-color: #ccc; 
@@ -38,6 +39,9 @@
                 margin-top: 1%;
                 margin-bottom: 1%;
                 margin-right: 10%;
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
             }
             
             .top-container {
@@ -134,6 +138,7 @@
         
         <div class="button-container">
             <a href="/networks/create" class="button" >新規作成</a>
+            <a href="/profile" class="button" >アカウント情報</a>
         </div>
         
         <div class="main-container">
