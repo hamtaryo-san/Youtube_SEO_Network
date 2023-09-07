@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('network_id')->constrained();
             //'network_id' は 'networksテーブル' の 'id' を参照する外部キーです
+            $table->string('rank',50);
             $table->string('rate',50);
         });
     }

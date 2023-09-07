@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('network_tag', function (Blueprint $table) {
-            $table->foreignId('network_id')->constrained('tags');
-            $table->foreignId('tag_id')->constrained('networks');
+            $table->foreignId('network_id')->constrained('networks');
+            $table->foreignId('tag_id')->constrained('tags');
             $table->primary(['network_id', 'tag_id']);
         });
     }

@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [NetworkController::class, 'index']);
     Route::get('/networks/create', [NetworkController::class, 'create']);
     Route::post('/networks/create', [NetworkController::class, 'proceed']);
+    Route::get('/networks/{network}', [NetworkController::class ,'show']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

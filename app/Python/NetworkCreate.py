@@ -142,13 +142,13 @@ def community_detecting(G, df):
     common_list.append(-1)
     common_list.append(-2)
     
-    whole_community_dict = {}
-    no1_community_dict = {}
-    no2_community_dict = {}
-    no3_community_dict = {}
-    no4_community_dict = {}
-    no5_community_dict = {}
-    no6_community_dict = {}
+    whole_community_dict = {'Words' : {}}
+    no1_community_dict = {'Words' : {}}
+    no2_community_dict = {'Words' : {}}
+    no3_community_dict = {'Words' : {}}
+    no4_community_dict = {'Words' : {}}
+    no5_community_dict = {'Words' : {}}
+    no6_community_dict = {'Words' : {}}
     
     dict_list = [
         no1_community_dict,
@@ -187,7 +187,7 @@ def community_detecting(G, df):
             if word >= len(Top20words_list)-1:
                 pass
             else:
-                dict_list[i]['Top{}'.format(word+1)] = {'Word' : Top20words_list[word][0], 'Rate' : Top20words_list[word][1]}
+                dict_list[i]['Words']['Top{}'.format(word+1)] = {'Word' : Top20words_list[word][0], 'Rate' : Top20words_list[word][1]}
     
     return [color_list, dict_list]
 
@@ -195,7 +195,7 @@ def graph_storing(G, color_list, img_store_path):
     fig = plt.figure(figsize=(20, 20))
     pos = nx.spring_layout(G, seed=3)
     nx.draw_networkx_edges(G, pos, edge_color='gray', width=0.3)
-    nx.draw_networkx_nodes(G, node_color=color_list, pos=pos, node_size=10)
+    nx.draw_networkx_nodes(G, node_color=color_list, pos=pos, node_size=50)
     plt.axis('off')
     file_name = str(uuid.uuid1())
     fig.savefig(img_store_path+"/{}.png".format(file_name))
@@ -204,25 +204,19 @@ def graph_storing(G, color_list, img_store_path):
 
 def return_json(component, 
                 sort, 
-                graph_path, 
-                json_store_path,
+                graph_path,
                 WholeWordList = {}, 
                 No1WordList = {}, 
                 No2WordList = {},
                 No3WordList = {}, 
                 No4WordList = {}, 
                 No5WordList = {},
-                No6WordList = {},):
-
-    file_name = str(uuid.uuid1())
-
-    json_path_in_file = "{}/{}.json".format(json_store_path, file_name)
+                No6WordList = {}):
 
     network_dict = {
         "component" : component,
         "sort" : sort,
         "graph_path" : graph_path,
-        "json_path" : json_path_in_file,
         "community" : {
             "WholeNetwork" :  WholeWordList,
             "No1Community" :  No1WordList,
@@ -234,10 +228,9 @@ def return_json(component,
         }
     }
 
-    with open("{}/{}.json".format(json_store_path, file_name), 'w') as f:
-        json.dump(network_dict, f, indent=2)
+    network_json = json.dumps(network_dict, ensure_ascii=False)
     
-    return json_path_in_file
+    return network_json
 
 
 if __name__ == "__main__":
@@ -247,12 +240,11 @@ if __name__ == "__main__":
     component = str(argv[2])
     sort = str(argv[3])
     YOUTUBE_API_KEY = str(argv[4])
-    json_store_path = str(argv[5])
-    img_store_path = str(argv[6])
+    img_store_path = str(argv[5])
 
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
-    df = get_video_info(part='snippet',q=keyword,order=sort ,type=component ,num = 10)
+    df = get_video_info(part='snippet',q=keyword,order=sort ,type=component ,num = 5)
     df_static = pd.DataFrame(list(df['videoId'].apply(lambda x : get_statistics(x))))
     df_output = pd.concat([df,df_static], axis = 1)
     df_output  = df_output.loc[:, ['videoId','title','publishedAt','tags']]
@@ -260,12 +252,11 @@ if __name__ == "__main__":
     df_output2 = dataframe_cleaning(df_output)
     G = create_network(df_output2)
     community_data = community_detecting(G, df_output2)
-    graph_storing(G, community_data[0], img_store_path)
+    img_path = graph_storing(G, community_data[0], img_store_path)
 
-    path = return_json(component, 
+    network_json = return_json(component, 
             sort, 
-            img_store_path, 
-            json_store_path,
+            img_path,
             WholeWordList = community_data[1][6], 
             No1WordList = community_data[1][0], 
             No2WordList = community_data[1][1],
@@ -274,4 +265,4 @@ if __name__ == "__main__":
             No5WordList = community_data[1][4],
             No6WordList = community_data[1][5],)
     
-    print(path)
+    print(network_json)

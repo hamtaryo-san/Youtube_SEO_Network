@@ -9,6 +9,8 @@ class Word extends Model
 {
     use HasFactory;
     
+    public $timestamps = false;
+    
     public function community()   
     {
         return $this->belongsTo(Community::class);  

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             //'user_id' は 'usersテーブル' の 'id' を参照する外部キーです
             $table->string('title',50);
+            $table->string('keyword',50);
             $table->string('graph');
             $table->string('sort',50);
             $table->string('component',50);

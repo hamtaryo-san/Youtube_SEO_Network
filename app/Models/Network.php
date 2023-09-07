@@ -16,6 +16,17 @@ class Network extends Model
     
     public function tags()   
     {
-        return $this->hasMany(Tag::class);  
+        return $this->belongsToMany(Tag::class);  
     }
+    
+    public function user()   
+    {
+        return $this->belongsTo(User::class);  
+    }
+    
+    public function getByLimit(int $limit_count = 6)
+    {
+        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
 }

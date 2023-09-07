@@ -13,6 +13,6 @@ class Tag extends Model
     
     public function networks()   
     {
-        return $this->hasMany(Network::class);  
+        return $this->belongsToMany(Network::class);  
     }
 }

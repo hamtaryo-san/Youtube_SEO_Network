@@ -9,6 +9,8 @@ class Community extends Model
 {
     use HasFactory;
     
+    public $timestamps = false;
+    
     public function network()   
     {
         return $this->belongsTo(Network::class);  
