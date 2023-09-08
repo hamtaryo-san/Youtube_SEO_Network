@@ -15,9 +15,6 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        // テーブルのクリア
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        
         DB::table('tags')->truncate();
     
         // 初期データ用意（列名をキーとする連想配列）
@@ -30,6 +27,5 @@ class TagsTableSeeder extends Seeder
         foreach($tags as $tag) {
           \App\Models\Tag::create($tag);
         }
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
