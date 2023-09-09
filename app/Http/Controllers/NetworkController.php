@@ -37,7 +37,7 @@ class NetworkController extends Controller
         
         //$json_path = asset('/json');
         //$image_path = asset('/images');
-        $image_path = './storage/images';
+        $image_path = '.';
         $api_key = config('app.youtube_api_key');
         
         $pythonPath =  "../app/Python/";
@@ -46,8 +46,7 @@ class NetworkController extends Controller
         //sep指定してtagつけてるようにする(explode)
         
         $pythonPath =  "../app/Python/";
-        //$command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
-        $command = "python3 " . $pythonPath . "hello.py";
+        $command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
         exec($command , $outputs);
         
         dd($outputs, $api_key);
