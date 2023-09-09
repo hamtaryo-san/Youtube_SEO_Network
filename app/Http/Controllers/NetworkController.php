@@ -37,7 +37,7 @@ class NetworkController extends Controller
         
         //$json_path = asset('/json');
         //$image_path = asset('/images');
-        $image_path = '.';
+        $image_path = './storage/images';
         $api_key = config('app.youtube_api_key');
         
         $pythonPath =  "../app/Python/";
