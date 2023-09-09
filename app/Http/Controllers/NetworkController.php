@@ -49,6 +49,8 @@ class NetworkController extends Controller
         $command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
         exec($command , $outputs);
         
+        dd($outputs, $api_key);
+        
         $tmp = json_encode($outputs[0]);
         $network_arr = json_decode($outputs[0], true);
         

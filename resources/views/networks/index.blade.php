@@ -85,8 +85,8 @@
                 position: relative;
                 border: 1px solid #ccc;
                 background-color: #f9f9f9;
-                border-radius: 5px;
-                padding: 20px;
+                border-radius: 1vw;
+                padding: 1vw;
                 margin-left: 2vw;
                 margin-right: 2vw;
                 margin-top: 2vw;
