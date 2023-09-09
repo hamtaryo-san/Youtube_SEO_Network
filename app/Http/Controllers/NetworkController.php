@@ -46,7 +46,8 @@ class NetworkController extends Controller
         //sep指定してtagつけてるようにする(explode)
         
         $pythonPath =  "../app/Python/";
-        $command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
+        //$command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
+        $command = "pwd";
         exec($command , $outputs);
         
         dd($outputs, $api_key);
