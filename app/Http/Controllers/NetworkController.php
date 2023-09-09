@@ -47,7 +47,7 @@ class NetworkController extends Controller
         
         $pythonPath =  "../app/Python/";
         //$command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
-        $command = "python3 " . $pythonPath . "Hello.py";
+        $command = "python3 " . $pythonPath . "hello.py";
         exec($command , $outputs);
         
         dd($outputs, $api_key);
