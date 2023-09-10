@@ -37,8 +37,10 @@ class NetworkController extends Controller
         
         //$json_path = asset('/json');
         //$image_path = asset('/images');
-        $image_path = './storage/images';
-        $api_key = config('app.youtube_api_key');
+        $image_path = '.';
+        $youtube_api_key = config('app.youtube_api_key');
+        $cloudinary_api_secret = config('app.cloudinary_api_secret');
+        $cloudinary_api_key = config('app.cloudinary_api_key');
         
         $pythonPath =  "../app/Python/";
         //ここでnetworksのテーブルにkeyword,title,component,userid
@@ -46,7 +48,7 @@ class NetworkController extends Controller
         //sep指定してtagつけてるようにする(explode)
         
         $pythonPath =  "../app/Python/";
-        $command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $api_key . ' '. $image_path;
+        $command = "python3 " . $pythonPath . "NetworkCreate.py " . $keyword . ' '. $component . ' ' . $sort . ' ' . $youtube_api_key  . ' '. $image_path . ' ' . $cloudinary_api_secret . ' ' . $cloudinary_api_key;
         exec($command , $outputs);
         
         $tmp = json_encode($outputs[0]);

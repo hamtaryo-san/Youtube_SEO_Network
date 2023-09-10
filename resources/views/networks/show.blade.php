@@ -194,7 +194,7 @@
                 作成日時: {{ $network->created_at }}
             </h3>
             <div class="image">
-                <img src="{{ asset($network->graph) }}">
+                <img src={{ $network->graph }}>
             </div>
         </div>
         <div class="table-container">
