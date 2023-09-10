@@ -9,6 +9,13 @@ return [
     */
     
     'youtube_api_key' => env('YOUTUBE_API_KEY','NONE'),
+    
+    /*
+    cloudinary api keyについての設定
+    */
+    
+    'cloudinary_api_key' => env('CLOUDINARY_API_KEY','NONE'),
+    'cloudinary_api_secret' => env('CLOUDINARY_API_SECRET','NONE'),
 
     /*
     |--------------------------------------------------------------------------
