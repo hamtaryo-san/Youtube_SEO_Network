@@ -15,6 +15,8 @@ import json
 import collections
 import sys
 import uuid
+import cloudinary
+import cloudinary.uploader
 
 
 def get_video_info(part, q, order, type, num):
@@ -199,8 +201,11 @@ def graph_storing(G, color_list, img_store_path):
     plt.axis('off')
     file_name = str(uuid.uuid1())
     fig.savefig(img_store_path+"/{}.png".format(file_name))
+    
+    response = cloudinary.uploader.upload("{}.png".format(file_name))
+    uploaded_image_url = response['url']
 
-    return '{}/{}.png'.format(img_store_path, file_name)
+    return uploaded_image_url
 
 def return_json(component, 
                 sort, 
@@ -241,10 +246,18 @@ if __name__ == "__main__":
     sort = str(argv[3])
     YOUTUBE_API_KEY = str(argv[4])
     img_store_path = str(argv[5])
+    Cloudinary_api_secret = str(argv[6])
+    Cloudinary_api_key = str(argv[7])
+    
+    cloudinary.config( 
+      cloud_name = "djjcbr1nm", 
+      api_key = Cloudinary_api_key, 
+      api_secret = Cloudinary_api_secret
+    )
 
     youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
-    df = get_video_info(part='snippet',q=keyword,order=sort ,type=component ,num = 5)
+    df = get_video_info(part='snippet',q=keyword,order=sort ,type=component ,num = 40)
     df_static = pd.DataFrame(list(df['videoId'].apply(lambda x : get_statistics(x))))
     df_output = pd.concat([df,df_static], axis = 1)
     df_output  = df_output.loc[:, ['videoId','title','publishedAt','tags']]
