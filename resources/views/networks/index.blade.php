@@ -144,7 +144,7 @@
         <div class="main-container">
             @foreach($networks as $network)
                 <div class="board">
-                    <img src="{{ asset($network->graph) }}" class='image'>
+                    <img src="{{ $network->graph }}" class='image'>
                     <a href="/networks/{{ $network->id }}" class='board-text'>Network Title : {{ $network->title }}</a>
                     <p class='board-text-small'>Keyword : {{ $network->keyword }}</p>
                     <p class='board-text-small'>Created at : {{ $network->created_at }}</p>
